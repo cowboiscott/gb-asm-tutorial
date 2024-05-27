@@ -12,6 +12,7 @@ GENDIR	    	= $(SRCDIR)/generated
 GENSPRITES	    = $(GENDIR)/sprites
 GENBACKGROUNDS	= $(GENDIR)/backgrounds
 BINS	    	= $(DSTDIR)/$(PROJECTNAME).gb
+SYM		    	= $(DSTDIR)/$(PROJECTNAME).sym
 
 # Tools
 RGBDS ?=
@@ -99,7 +100,7 @@ $(foreach i, $(ASMSOURCES_DIRS), $(eval $(call object-from-asm,$i)))
 
 # Link and build the final ROM.
 $(BINS): $(OBJS) | $(DSTDIR)
-	$(LINK) -o $@ $^
+	$(LINK) -n $(SYM) -o $@ $^
 	$(FIX) $(FIXFLAGS) $@
 # Ensure directories for generated files exist.
 define ensure-directory
